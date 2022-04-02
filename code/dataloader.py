@@ -53,7 +53,7 @@ class Dataloader():
         x = x.transpose(1, 0)
         tgt = self.data[start+1:end+1, :]
         a = torch.ones((length, length), dtype=bool)
-        mask = torch.triu(a, diagonal=0).transpose(1,0)
+        mask = torch.triu(a, diagonal=0).transpose(1,0) #true means that we can see the token at this point
 
         return x, tgt, mask
 
@@ -72,7 +72,6 @@ def main():
     # x, tgt, mask = dataloader.get_batch() #4X3 x, tgt; 3X3 mask
     x, tgt, mask = dataloader.get_batch(0)
     print(x, "\n", tgt, "\n", mask)
-
 
 if __name__ == "__main__":
     main()
