@@ -13,6 +13,7 @@ class Tokenizer():
             "<eos>": 2,
             "<unk>": 3,
         }
+
     def build_vocab(self, dataset):
         counter = {}
         for sentence in dataset:
@@ -34,7 +35,7 @@ class Tokenizer():
     def tokenize(self, input):
         result = []
         for sentence in input:
-            words = sentence.split(" ")
+            words = sentence.split(" ") + ["<eos>"]
             word_seq = []
             for word in words:
                 if word is not "":
@@ -45,23 +46,14 @@ class Tokenizer():
         return result
 
 
-
 def main():
     tokenizer = Tokenizer()
     with open("/Users/chenshengmai/Desktop/Spring 2022/language_model/data/train") as file:
         dataset = file.read().split("\n")
-    vocab = tokenizer.build_vocab(dataset)
+    tokenizer.build_vocab(dataset)
     example = ["this is sample code", "for a project", ""]
     print(tokenizer.tokenize(example))
 
+
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
